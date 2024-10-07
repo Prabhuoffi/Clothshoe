@@ -6,8 +6,9 @@ const UserRoutes = require('./router/userRoutes');
 const shoeRoutes = require('./router/shoesRoutes');
 const orderRoutes = require('./router/orderRoutes');
 const paymentRoutes = require('./router/paymentRoutes');
-const isAuth = require("./middleware/auth");
-const serverless = require('serverless-http');
+const isAuth = require("./middleware/auth")
+
+
 
 dotenv.config();
 
@@ -24,10 +25,9 @@ app.use('/api/shoes', shoeRoutes);
 app.use('/api/order', orderRoutes);
 app.use('/api/payments', paymentRoutes);
 
-// Optional: Handle undefined routes
-app.use((req, res) => {
-  res.status(404).json({ message: 'Route not found' });
-});
 
-// Export the handler for Vercel
-module.exports.handler = serverless(app);
+
+const PORT = process.env.PORT || 5001;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
